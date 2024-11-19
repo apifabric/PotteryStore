@@ -1,0 +1,22 @@
+<o-form #ClassReportForm attr="ClassReport_form_insert" service="ClassReport" entity="ClassReport" 
+keys="id" fxLayout="column" show-header="yes" header-actions="I"
+horizontal-scroll="yes"
+after-insert-mode="new" class="standalone-form-container" (onInsertMode)="onInsertMode()">
+
+<o-row attr="row1" layout-align="start stretch">
+  <div fxLayout="row wrap" fxLayoutAlign="start start" fxFlex fxLayoutGap="14px">
+    
+        <o-integer-input #id attr="id" label=" id*" type="integer" editable="no" required="no" ></o-integer-input>
+      
+        <o-integer-input #total_students attr="total_students" label="total_students" type="integer" editable="no" required="no" ></o-integer-input>
+      
+        <o-integer-input #service_activity_count attr="service_activity_count" label="service_activity_count" type="integer" editable="no" required="no" ></o-integer-input>
+      
+        <o-integer-input #class_id attr="class_id" label="class_id" type="integer" editable="no" required="yes" ></o-integer-input>
+      
+</div>
+</o-row>
+
+<div layout-padding></div>
+
+</o-form>

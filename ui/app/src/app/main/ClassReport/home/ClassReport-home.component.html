@@ -1,0 +1,37 @@
+<o-form-layout-manager attr="ClassReport" mode="dialog" title="CLASSREPORT">
+    <div fxFill fxLayout="column" fxLayoutAlign="start">
+        <o-table 
+            attr="ClassReportTable" 
+            service="ClassReport" 
+            entity="ClassReport" 
+            title="CLASSREPORT"
+            keys="id"
+            columns="id;total_students;service_activity_count;class_id" 
+            header-actions="R;D"
+            visible-columns="id;total_students;service_activity_count;class_id"  
+            sort-columns="id" 
+            query-rows="20" 
+            quick-filter="yes"
+            row-height="medium" 
+            select-all-checkbox="true" 
+            pageable="yes"  
+            auto-adjust="true" 
+            virtual-scroll="yes" 
+            edition-mode="dblclick"
+            horizontal-scroll="yes"
+            show-title="yes"
+            export-button="yes">
+            
+            <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-column #total_students attr="total_students" title="total_students" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-column #service_activity_count attr="service_activity_count" title="service_activity_count" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-column #class_id attr="class_id" title="class_id" type="integer" editable="no" required="yes" content-align="center"></o-table-column>
+            
+            <o-table-context-menu></o-table-context-menu>
+            <o-table-paginator page-size-options="24;48;96"></o-table-paginator>
+        </o-table>
+    </div>
+</o-form-layout-manager>

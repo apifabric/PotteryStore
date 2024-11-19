@@ -1,0 +1,526 @@
+about:
+  date: November 19, 2024 20:58:24
+  recent_changes: works with modified safrs-react-admin
+  version: 0.0.0
+api_root: '{http_type}://{swagger_host}:{port}/{api}'
+authentication: '{system-default}'
+entities:
+  Activity:
+    columns:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: description
+      template: text
+      type: TEXT
+    - name: is_service_activity
+      type: Boolean
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Represents extra-curricular activities students can participate in
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: name
+    hidden: {}
+    home_template: home_template.html
+    info_list: Represents extra-curricular activities students can participate in
+    label: Activity
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - activity_id
+      name: StudentActivityList
+      resource: StudentActivity
+    type: Activity
+  Artist:
+    columns:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: bio
+      template: text
+      type: TEXT
+    - name: birth_date
+      type: DATE
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Represents artists whose works and classes are featured
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: name
+    hidden: {}
+    home_template: home_template.html
+    info_list: Represents artists whose works and classes are featured
+    label: Artist
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - artist_id
+      name: ClassList
+      resource: Class
+    - direction: tomany
+      fks:
+      - artist_id
+      name: ItemList
+      resource: Item
+    type: Artist
+  Class:
+    columns:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: artist_id
+      template: integer
+      type: INTEGER
+    - name: description
+      template: text
+      type: TEXT
+    - name: price
+      required: true
+      template: currency
+      type: NUMERIC
+    - name: date
+      required: true
+      type: DATETIME
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Represents pottery classes offered by the store
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: name
+    hidden: {}
+    home_template: home_template.html
+    info_list: Represents pottery classes offered by the store
+    label: Class
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - artist_id
+      name: artist
+      resource: Artist
+    type: Class
+  ClassReport:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: total_students
+      template: integer
+      type: INTEGER
+    - name: service_activity_count
+      template: integer
+      type: INTEGER
+    - name: class_id
+      required: true
+      template: integer
+      type: INTEGER
+    description: View or report for classes, summarizing events and participation
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    hidden: {}
+    home_template: home_template.html
+    info_list: View or report for classes, summarizing events and participation
+    label: ClassReport
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    type: ClassReport
+  Customer:
+    columns:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: email
+      required: true
+      template: text
+      type: VARCHAR
+    - name: balance
+      template: currency
+      type: NUMERIC
+    - name: credit_limit
+      template: currency
+      type: NUMERIC
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Represents customers who purchase items and classes
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: name
+    hidden: {}
+    home_template: home_template.html
+    info_list: Represents customers who purchase items and classes
+    label: Customer
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - customer_id
+      name: OrderList
+      resource: Order
+    type: Customer
+  Enrollment:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: student_id
+      required: true
+      template: integer
+      type: INTEGER
+    - name: enrolment_date
+      required: true
+      type: DATETIME
+    - name: class_id
+      required: true
+      template: integer
+      type: INTEGER
+    description: Represents the enrollment of students to classes
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    hidden: {}
+    home_template: home_template.html
+    info_list: Represents the enrollment of students to classes
+    label: Enrollment
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - student_id
+      name: student
+      resource: Student
+    type: Enrollment
+  Item:
+    columns:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: artist_id
+      template: integer
+      type: INTEGER
+    - name: description
+      template: text
+      type: TEXT
+    - name: price
+      required: true
+      template: currency
+      type: NUMERIC
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Represents handmade items sold in the store
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: name
+    hidden: {}
+    home_template: home_template.html
+    info_list: Represents handmade items sold in the store
+    label: Item
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - item_id
+      name: OrderDetailList
+      resource: OrderDetail
+    - direction: toone
+      fks:
+      - artist_id
+      name: artist
+      resource: Artist
+    type: Item
+  Order:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: customer_id
+      required: true
+      template: integer
+      type: INTEGER
+    - name: date
+      required: true
+      type: DATETIME
+    - name: amount_total
+      template: currency
+      type: NUMERIC
+    description: Represents orders made by customers
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    hidden: {}
+    home_template: home_template.html
+    info_list: Represents orders made by customers
+    label: Order
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - order_id
+      name: OrderDetailList
+      resource: OrderDetail
+    - direction: tomany
+      fks:
+      - order_id
+      name: OrderReportList
+      resource: OrderReport
+    - direction: toone
+      fks:
+      - customer_id
+      name: customer
+      resource: Customer
+    type: Order
+  OrderDetail:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: item_id
+      required: true
+      template: integer
+      type: INTEGER
+    - name: order_id
+      required: true
+      template: integer
+      type: INTEGER
+    - name: quantity
+      required: true
+      template: integer
+      type: INTEGER
+    - name: amount
+      template: currency
+      type: NUMERIC
+    description: Represents details of each order, including purchased items
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    hidden: {}
+    home_template: home_template.html
+    info_list: Represents details of each order, including purchased items
+    label: OrderDetail
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - item_id
+      name: item
+      resource: Item
+    - direction: toone
+      fks:
+      - order_id
+      name: order
+      resource: Order
+    type: OrderDetail
+  OrderReport:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: order_id
+      required: true
+      template: integer
+      type: INTEGER
+    - name: total_amount
+      template: currency
+      type: NUMERIC
+    description: View or report for orders, to keep track of total amounts
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    hidden: {}
+    home_template: home_template.html
+    info_list: View or report for orders, to keep track of total amounts
+    label: OrderReport
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - order_id
+      name: order
+      resource: Order
+    type: OrderReport
+  Student:
+    columns:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: email
+      required: true
+      template: text
+      type: VARCHAR
+    - name: is_honor_student
+      type: Boolean
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Represents students enrolled in pottery classes
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: name
+    hidden: {}
+    home_template: home_template.html
+    info_list: Represents students enrolled in pottery classes
+    label: Student
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - student_id
+      name: EnrollmentList
+      resource: Enrollment
+    - direction: tomany
+      fks:
+      - student_id
+      name: StudentActivityList
+      resource: StudentActivity
+    type: Student
+  StudentActivity:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: activity_id
+      required: true
+      template: integer
+      type: INTEGER
+    - name: student_id
+      required: true
+      template: integer
+      type: INTEGER
+    - name: participation_date
+      required: true
+      type: DATETIME
+    description: Represents participation of students in activities
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    hidden: {}
+    home_template: home_template.html
+    info_list: Represents participation of students in activities
+    label: StudentActivity
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - activity_id
+      name: activity
+      resource: Activity
+    - direction: toone
+      fks:
+      - student_id
+      name: student
+      resource: Student
+    type: StudentActivity
+settings:
+  HomeJS: /admin-app/home.js
+  max_list_columns: 8
+  style_guide:
+    applicationLocales:
+    - en
+    - es
+    currency_symbol: $
+    currency_symbol_position: left
+    date_format: LL
+    decimal_max: '1000000000'
+    decimal_min: '0'
+    decimal_separator: .
+    edit_on_mode: dblclick
+    exclude_listpicker: false
+    include_translation: false
+    keycloak_client_id: alsclient
+    keycloak_realm: kcals
+    keycloak_url: http://localhost:8080
+    locale: en
+    max_decimal_digits: '4'
+    min_decimal_digits: '2'
+    mode: tab
+    pick_style: list
+    serviceType: OntimizeEE
+    startSessionPath: /auth/login
+    style: light
+    thousand_separator: ','
+    use_keycloak: false

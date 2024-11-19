@@ -1,0 +1,43 @@
+<o-form #ClassForm attr="Class_form_insert" service="Class" entity="Class" 
+keys="id" fxLayout="column" show-header="yes" header-actions="I"
+horizontal-scroll="yes"
+after-insert-mode="new" class="standalone-form-container" (onInsertMode)="onInsertMode()">
+
+<o-row attr="row1" layout-align="start stretch">
+  <div fxLayout="row wrap" fxLayoutAlign="start start" fxFlex fxLayoutGap="14px">
+    
+        <o-text-input #name attr="name" label=" name*" enabled="yes" required="yes" fxFlex="20%" class="form-field"></o-text-input>
+      
+        <o-list-picker 
+        attr="artist_id"
+        service="Artist" 
+        entity="ArtistType"
+        fxFlex="30" 
+        query-on-init="no" 
+        query-on-bind="yes" 
+        required="no" 
+        enabled="yes" 
+        filter="yes"
+        value-column="id" 
+        value-column-type="INTEGER"  
+        keys="id" 
+        columns="id;artist_id;name" 
+        title="artist_id"
+        visible-columns="id;name" 
+        separator=" - " width="680px" class="form-field">
+</o-list-picker>
+      
+        <o-text-input #description attr="description" label="description" enabled="yes" required="no" fxFlex="20%" class="form-field"></o-text-input>
+      
+        <o-currency-input #price attr="price" title="price" type="currency" editable="no" required="yes" currency-symbol="$" currency-symbol-position="left" thousand-separator="," decimal-separator="."></o-currency-input>
+      
+        <o-date-input #date attr="date" type="timestamp" label="date" editable="no" required="yes" format="LL" fxFlex="20%" class="form-field"></o-date-input>
+      
+        <o-integer-input #id attr="id" label="id" type="integer" editable="no" required="no" ></o-integer-input>
+      
+</div>
+</o-row>
+
+<div layout-padding></div>
+
+</o-form>

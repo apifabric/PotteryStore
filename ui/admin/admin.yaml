@@ -1,0 +1,334 @@
+about:
+  date: November 19, 2024 20:58:24
+  recent_changes: works with modified safrs-react-admin
+  version: 0.0.0
+api_root: '{http_type}://{swagger_host}:{port}/{api}'
+authentication: '{system-default}'
+info:
+  number_relationships: 9
+  number_tables: 12
+info_toggle_checked: true
+resources:
+  Activity:
+    attributes:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+    - name: description
+    - name: is_service_activity
+      type: Boolean
+    - name: id
+    description: Represents extra-curricular activities students can participate in
+    info_list: Represents extra-curricular activities students can participate in
+    tab_groups:
+    - direction: tomany
+      fks:
+      - activity_id
+      name: StudentActivityList
+      resource: StudentActivity
+    type: Activity
+    user_key: name
+  Artist:
+    attributes:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+    - name: bio
+    - name: birth_date
+      type: DATE
+    - name: id
+    description: Represents artists whose works and classes are featured
+    info_list: Represents artists whose works and classes are featured
+    tab_groups:
+    - direction: tomany
+      fks:
+      - artist_id
+      name: ClassList
+      resource: Class
+    - direction: tomany
+      fks:
+      - artist_id
+      name: ItemList
+      resource: Item
+    type: Artist
+    user_key: name
+  Class:
+    attributes:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+    - name: artist_id
+    - name: description
+    - name: price
+      required: true
+    - name: date
+      required: true
+      type: DATETIME
+    - name: id
+    description: Represents pottery classes offered by the store
+    info_list: Represents pottery classes offered by the store
+    tab_groups:
+    - direction: toone
+      fks:
+      - artist_id
+      name: artist
+      resource: Artist
+    type: Class
+    user_key: name
+  ClassReport:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: total_students
+    - name: service_activity_count
+    - name: class_id
+      required: true
+    description: View or report for classes, summarizing events and participation
+    info_list: View or report for classes, summarizing events and participation
+    type: ClassReport
+    user_key: id
+  Customer:
+    attributes:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+    - name: email
+      required: true
+    - name: balance
+    - name: credit_limit
+    - name: id
+    description: Represents customers who purchase items and classes
+    info_list: Represents customers who purchase items and classes
+    tab_groups:
+    - direction: tomany
+      fks:
+      - customer_id
+      name: OrderList
+      resource: Order
+    type: Customer
+    user_key: name
+  Enrollment:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: student_id
+      required: true
+    - name: enrolment_date
+      required: true
+      type: DATETIME
+    - name: class_id
+      required: true
+    description: Represents the enrollment of students to classes
+    info_list: Represents the enrollment of students to classes
+    tab_groups:
+    - direction: toone
+      fks:
+      - student_id
+      name: student
+      resource: Student
+    type: Enrollment
+    user_key: id
+  Item:
+    attributes:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+    - name: artist_id
+    - name: description
+    - name: price
+      required: true
+    - name: id
+    description: Represents handmade items sold in the store
+    info_list: Represents handmade items sold in the store
+    tab_groups:
+    - direction: tomany
+      fks:
+      - item_id
+      name: OrderDetailList
+      resource: OrderDetail
+    - direction: toone
+      fks:
+      - artist_id
+      name: artist
+      resource: Artist
+    type: Item
+    user_key: name
+  Order:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: customer_id
+      required: true
+    - name: date
+      required: true
+      type: DATETIME
+    - name: amount_total
+    description: Represents orders made by customers
+    info_list: Represents orders made by customers
+    tab_groups:
+    - direction: tomany
+      fks:
+      - order_id
+      name: OrderDetailList
+      resource: OrderDetail
+    - direction: tomany
+      fks:
+      - order_id
+      name: OrderReportList
+      resource: OrderReport
+    - direction: toone
+      fks:
+      - customer_id
+      name: customer
+      resource: Customer
+    type: Order
+    user_key: id
+  OrderDetail:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: item_id
+      required: true
+    - name: order_id
+      required: true
+    - name: quantity
+      required: true
+    - name: amount
+    description: Represents details of each order, including purchased items
+    info_list: Represents details of each order, including purchased items
+    tab_groups:
+    - direction: toone
+      fks:
+      - item_id
+      name: item
+      resource: Item
+    - direction: toone
+      fks:
+      - order_id
+      name: order
+      resource: Order
+    type: OrderDetail
+    user_key: id
+  OrderReport:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: order_id
+      required: true
+    - name: total_amount
+    description: View or report for orders, to keep track of total amounts
+    info_list: View or report for orders, to keep track of total amounts
+    tab_groups:
+    - direction: toone
+      fks:
+      - order_id
+      name: order
+      resource: Order
+    type: OrderReport
+    user_key: id
+  Student:
+    attributes:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+    - name: email
+      required: true
+    - name: is_honor_student
+      type: Boolean
+    - name: id
+    description: Represents students enrolled in pottery classes
+    info_list: Represents students enrolled in pottery classes
+    tab_groups:
+    - direction: tomany
+      fks:
+      - student_id
+      name: EnrollmentList
+      resource: Enrollment
+    - direction: tomany
+      fks:
+      - student_id
+      name: StudentActivityList
+      resource: StudentActivity
+    type: Student
+    user_key: name
+  StudentActivity:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: activity_id
+      required: true
+    - name: student_id
+      required: true
+    - name: participation_date
+      required: true
+      type: DATETIME
+    description: Represents participation of students in activities
+    info_list: Represents participation of students in activities
+    tab_groups:
+    - direction: toone
+      fks:
+      - activity_id
+      name: activity
+      resource: Activity
+    - direction: toone
+      fks:
+      - student_id
+      name: student
+      resource: Student
+    type: StudentActivity
+    user_key: id
+settings:
+  HomeJS: /admin-app/home.js
+  max_list_columns: 8
+  style_guide:
+    applicationLocales:
+    - en
+    - es
+    currency_symbol: $
+    currency_symbol_position: left
+    date_format: LL
+    decimal_max: '1000000000'
+    decimal_min: '0'
+    decimal_separator: .
+    detail_mode: tab
+    edit_on_mode: dblclick
+    exclude_listpicker: false
+    include_translation: 'false'
+    keycloak_client_id: alsclient
+    keycloak_realm: kcals
+    keycloak_url: http://localhost:8080
+    locale: en
+    max_decimal_digits: '4'
+    min_decimal_digits: '2'
+    new_mode: dialog
+    pick_style: list
+    row_height: small,
+    serviceType: OntimizeEE
+    startSessionPath: /auth/login
+    style: light
+    thousand_separator: ','
+    use_keycloak: 'false'

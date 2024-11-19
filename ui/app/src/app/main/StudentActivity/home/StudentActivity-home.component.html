@@ -1,0 +1,51 @@
+<o-form-layout-manager attr="StudentActivity" mode="tab" title="STUDENTACTIVITY">
+    <div fxFill fxLayout="column" fxLayoutAlign="start">
+        <o-table 
+            attr="StudentActivityTable" 
+            service="StudentActivity" 
+            entity="StudentActivity" 
+            title="STUDENTACTIVITY"
+            keys="id"
+            columns="id;activity_id;student_id;participation_date" 
+            header-actions="R;D"
+            visible-columns="id;activity_id;student_id;participation_date"  
+            sort-columns="id" 
+            query-rows="20" 
+            quick-filter="yes"
+            row-height="medium" 
+            select-all-checkbox="true" 
+            pageable="yes"  
+            auto-adjust="true" 
+            virtual-scroll="yes" 
+            edition-mode="dblclick"
+            horizontal-scroll="yes"
+            show-title="yes"
+            export-button="yes">
+            
+            <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-column attr="activity_id" title="activity_id">
+    <o-table-cell-renderer-service attr="activity_id" 
+        service="Activity" entity="ActivityType" columns="id;name"
+        parent-keys="id:activity_id"
+        value-column="name" keys="activity_id"
+        visible-columns="name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+            
+            <o-table-column attr="student_id" title="student_id">
+    <o-table-cell-renderer-service attr="student_id" 
+        service="Student" entity="StudentType" columns="id;name"
+        parent-keys="id:student_id"
+        value-column="name" keys="student_id"
+        visible-columns="name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+            
+            <o-date-input #participation_date attr="participation_date" type="timestamp" label="participation_date" editable="no" required="yes" format="LL" fxFlex="20%" class="form-field"></o-date-input>
+            
+            <o-table-context-menu></o-table-context-menu>
+            <o-table-paginator page-size-options="24;48;96"></o-table-paginator>
+        </o-table>
+    </div>
+</o-form-layout-manager>

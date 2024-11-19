@@ -1,0 +1,100 @@
+{
+    "name": "ClayCrafts",
+    "logo": {
+        "Type": "Logo",
+        "name": "ClayCraftsLogo.png",
+        "description": "Elegant logo of ClayCrafts exemplifying creativity and craftsmanship with a clay motif."
+    },
+    "sections": [
+        {
+            "title": "Welcome to ClayCrafts",
+            "subtitle": "Empowering Creativity in Pottery",
+            "name": "hero",
+            "label": "Home",
+            "content": "## Discover Unique Pottery Creations  \nYour journey into the heart of handcrafted artistry begins here. Explore diverse styles, skillsets, and exclusive artistry with our vibrant community.  \n\n[Explore Our Collections](#services)",
+            "order": 1,
+            "Type": "Hero",
+            "images": [
+                {
+                    "Type": "Hero",
+                    "name": "PotteryAppBanner.jpg",
+                    "description": "A captivating image of a skilled potter shaping clay on a wheel."
+                }
+            ]
+        },
+        {
+            "title": "About Us",
+            "subtitle": "Artistic Beauty Meets Skilled Craftsmanship",
+            "name": "about",
+            "label": "About",
+            "content": "### Our Story  \nAt **ClayCrafts**, we're passionate about celebrating the ancient craft of pottery through modern expressions. Founded by a collective of local artists, we offer a platform for artisans to share their unique creations and for enthusiasts to learn and grow in their pottery journey.\n\n### Our Mission  \nTo support and promote local artists and craftsmanship while fostering a creative community through engaging classes and unique handmade products.",
+            "order": 2,
+            "Type": "About",
+            "images": [
+                {
+                    "Type": "Gallery",
+                    "name": "TheTeam.jpg",
+                    "description": "A team of local pottery artists standing proudly with their creations."
+                }
+            ]
+        },
+        {
+            "title": "Our Services",
+            "subtitle": "Explore, Learn, Create",
+            "name": "services",
+            "label": "Services",
+            "content": "### Discover Our Offerings  \n- **Handmade Pottery Sales**: Explore a curated collection of unique, handcrafted pottery pieces made by local artisans.\n- **Pottery Classes**: Join our pottery workshops and unleash your inner artist. Suitable for all skill levels.\n- **Local Artist Spotlight**: Every month, we feature a local artist and their exclusive collection.\n\n[Book a Class Now!](/booking)",
+            "order": 3,
+            "Type": "ServiceList",
+            "images": [
+                {
+                    "Type": "ItemListing",
+                    "name": "VaseCollection.jpg",
+                    "description": "Intricate and colorful vases handmade by our artists."
+                },
+                {
+                    "Type": "ItemListing",
+                    "name": "HandsOnWorkshop.jpg",
+                    "description": "Participants engaged in a live pottery workshop."
+                }
+            ]
+        },
+        {
+            "title": "Contact Us",
+            "subtitle": "We'd Love to Hear from You",
+            "name": "contact",
+            "label": "Contact",
+            "content": "### Get in Touch  \nWhether you have a question, need assistance, or wish to share your passion for pottery, we're here to help!  \n\n- **Email**: support@claycrafts.com  \n- **Phone**: (123) 456-7890  \n- **Address**: 123 Artisans Lane, Creativetown, CA 90123\n\n[Contact Form](#contact)",
+            "order": 4,
+            "Type": "Contact",
+            "images": [
+                {
+                    "Type": "Map",
+                    "name": "LocationMap.jpg",
+                    "description": "Marked map showing the location of ClayCrafts."
+                }
+            ]
+        },
+        {
+            "title": "Gallery of Masterpieces",
+            "subtitle": "A Glimpse into the Artistic Paradise",
+            "name": "gallery",
+            "label": "Gallery",
+            "content": "### Visual Delight  \nPeruse our selection of pottery masterpieces, where innovation meets tradition, crafted by our finest local artists.",
+            "order": 5,
+            "Type": "Gallery",
+            "images": [
+                {
+                    "Type": "Gallery",
+                    "name": "SculptureGallery.jpg",
+                    "description": "A stunning collection of sculptural pottery showcased in a gallery setting."
+                },
+                {
+                    "Type": "Gallery",
+                    "name": "ClassSnapshot.jpg",
+                    "description": "Capturing a moment in our vibrant pottery classes."
+                }
+            ]
+        }
+    ]
+}

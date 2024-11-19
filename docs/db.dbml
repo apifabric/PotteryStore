@@ -1,0 +1,121 @@
+// Copy this text, paste to https://dbdiagram.io/d
+// Or, https://databasediagram.com/app
+// Or, view in VSCode with extension: "DBML Live Preview"
+
+Project DBML {
+  Note: '''
+Activity: Represents extra-curricular activities students can participate in
+Artist: Represents artists whose works and classes are featured
+Class: Represents pottery classes offered by the store
+ClassReport: View or report for classes, summarizing events and participation
+Customer: Represents customers who purchase items and classes
+Enrollment: Represents the enrollment of students to classes
+Student: Represents students enrolled in pottery classes
+Item: Represents handmade items sold in the store
+Order: Represents orders made by customers
+OrderDetail: Represents details of each order, including purchased items
+OrderReport: View or report for orders, to keep track of total amounts
+StudentActivity: Represents participation of students in activities
+'''
+}
+
+Table Activity {
+    id INTEGER [primary key]
+    name VARCHAR 
+    description TEXT 
+    is_service_activity BOOLEAN 
+    }
+
+Table Artist {
+    id INTEGER [primary key]
+    name VARCHAR 
+    bio TEXT 
+    birth_date DATE 
+    }
+
+Table Class {
+    id INTEGER [primary key]
+    name VARCHAR 
+    description TEXT 
+    price NUMERIC 
+    date DATETIME 
+    artist_id INTEGER 
+    }
+
+Table ClassReport {
+    id INTEGER [primary key]
+    class_id INTEGER 
+    total_students INTEGER 
+    service_activity_count INTEGER 
+    }
+
+Table Customer {
+    id INTEGER [primary key]
+    name VARCHAR 
+    email VARCHAR 
+    balance NUMERIC 
+    credit_limit NUMERIC 
+    }
+
+Table Enrollment {
+    id INTEGER [primary key]
+    class_id INTEGER 
+    student_id INTEGER 
+    enrolment_date DATETIME 
+    }
+
+Table Student {
+    id INTEGER [primary key]
+    name VARCHAR 
+    email VARCHAR 
+    is_honor_student BOOLEAN 
+    }
+
+Table Item {
+    id INTEGER [primary key]
+    name VARCHAR 
+    description TEXT 
+    price NUMERIC 
+    artist_id INTEGER 
+    }
+
+Table Order {
+    id INTEGER [primary key]
+    customer_id INTEGER 
+    date DATETIME 
+    amount_total NUMERIC 
+    }
+
+Table OrderDetail {
+    id INTEGER [primary key]
+    order_id INTEGER 
+    item_id INTEGER 
+    quantity INTEGER 
+    amount NUMERIC 
+    }
+
+Table OrderReport {
+    id INTEGER [primary key]
+    order_id INTEGER 
+    total_amount NUMERIC 
+    }
+
+Table StudentActivity {
+    id INTEGER [primary key]
+    student_id INTEGER 
+    activity_id INTEGER 
+    participation_date DATETIME 
+    }
+
+
+
+// Relationships
+    Ref: Class.(artist_id) < Artist.(id)
+    Ref: Enrollment.(student_id) < Student.(id)
+    Ref: Item.(artist_id) < Artist.(id)
+    Ref: Order.(customer_id) < Customer.(id)
+    Ref: OrderDetail.(item_id) < Item.(id)
+    Ref: OrderDetail.(order_id) < Order.(id)
+    Ref: OrderReport.(order_id) < Order.(id)
+    Ref: StudentActivity.(activity_id) < Activity.(id)
+    Ref: StudentActivity.(student_id) < Student.(id)

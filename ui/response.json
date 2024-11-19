@@ -1,0 +1,104 @@
+{
+    "models": [
+        {
+            "classname": "Artist",
+            "code": "class Artist(Base):\n    \"\"\"description: Represents artists whose works and classes are featured\"\"\"\n    __tablename__ = 'artist'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    name = Column(String, nullable=False)\n    bio = Column(Text)\n    birth_date = Column(Date)",
+            "description": "Represents artists whose works and classes are featured",
+            "name": "Artist"
+        },
+        {
+            "classname": "Item",
+            "code": "class Item(Base):\n    \"\"\"description: Represents handmade items sold in the store\"\"\"\n    __tablename__ = 'item'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    name = Column(String, nullable=False)\n    description = Column(Text)\n    price = Column(Numeric, nullable=False)\n    artist_id = Column(Integer, ForeignKey('artist.id'), nullable=True)",
+            "description": "Represents handmade items sold in the store",
+            "name": "Item"
+        },
+        {
+            "classname": "Class",
+            "code": "class Class(Base):\n    \"\"\"description: Represents pottery classes offered by the store\"\"\"\n    __tablename__ = 'class'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    name = Column(String, nullable=False)\n    description = Column(Text)\n    price = Column(Numeric, nullable=False)\n    date = Column(DateTime, nullable=False)\n    artist_id = Column(Integer, ForeignKey('artist.id'), nullable=True)",
+            "description": "Represents pottery classes offered by the store",
+            "name": "Class"
+        },
+        {
+            "classname": "Customer",
+            "code": "class Customer(Base):\n    \"\"\"description: Represents customers who purchase items and classes\"\"\"\n    __tablename__ = 'customer'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    name = Column(String, nullable=False)\n    email = Column(String, nullable=False)\n    balance = Column(Numeric, default=0)\n    credit_limit = Column(Numeric, default=1000)",
+            "description": "Represents customers who purchase items and classes",
+            "name": "Customer"
+        },
+        {
+            "classname": "Order",
+            "code": "class Order(Base):\n    \"\"\"description: Represents orders made by customers\"\"\"\n    __tablename__ = 'order'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    customer_id = Column(Integer, ForeignKey('customer.id'), nullable=False)\n    date = Column(DateTime, nullable=False)\n    amount_total = Column(Numeric, default=0)",
+            "description": "Represents orders made by customers",
+            "name": "Order"
+        },
+        {
+            "classname": "OrderDetail",
+            "code": "class OrderDetail(Base):\n    \"\"\"description: Represents details of each order, including purchased items\"\"\"\n    __tablename__ = 'order_detail'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    order_id = Column(Integer, ForeignKey('order.id'), nullable=False)\n    item_id = Column(Integer, ForeignKey('item.id'), nullable=False)\n    quantity = Column(Integer, nullable=False)\n    amount = Column(Numeric, default=0)",
+            "description": "Represents details of each order, including purchased items",
+            "name": "OrderDetail"
+        },
+        {
+            "classname": "Student",
+            "code": "class Student(Base):\n    \"\"\"description: Represents students enrolled in pottery classes\"\"\"\n    __tablename__ = 'student'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    name = Column(String, nullable=False)\n    email = Column(String, nullable=False)\n    is_honor_student = Column(Boolean, default=False)",
+            "description": "Represents students enrolled in pottery classes",
+            "name": "Student"
+        },
+        {
+            "classname": "Enrollment",
+            "code": "class Enrollment(Base):\n    \"\"\"description: Represents the enrollment of students to classes\"\"\"\n    __tablename__ = 'enrollment'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    class_id = Column(Integer, ForeignKey('class.id'), nullable=False)\n    student_id = Column(Integer, ForeignKey('student.id'), nullable=False)\n    enrolment_date = Column(DateTime, nullable=False)",
+            "description": "Represents the enrollment of students to classes",
+            "name": "Enrollment"
+        },
+        {
+            "classname": "Activity",
+            "code": "class Activity(Base):\n    \"\"\"description: Represents extra-curricular activities students can participate in\"\"\"\n    __tablename__ = 'activity'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    name = Column(String, nullable=False)\n    description = Column(Text)\n    is_service_activity = Column(Boolean, default=False)",
+            "description": "Represents extra-curricular activities students can participate in",
+            "name": "Activity"
+        },
+        {
+            "classname": "StudentActivity",
+            "code": "class StudentActivity(Base):\n    \"\"\"description: Represents participation of students in activities\"\"\"\n    __tablename__ = 'student_activity'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    student_id = Column(Integer, ForeignKey('student.id'), nullable=False)\n    activity_id = Column(Integer, ForeignKey('activity.id'), nullable=False)\n    participation_date = Column(DateTime, nullable=False)",
+            "description": "Represents participation of students in activities",
+            "name": "StudentActivity"
+        },
+        {
+            "classname": "OrderReport",
+            "code": "class OrderReport(Base):\n    \"\"\"description: View or report for orders, to keep track of total amounts\"\"\"\n    __tablename__ = 'order_report'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    order_id = Column(Integer, ForeignKey('order.id'), nullable=False)\n    total_amount = Column(Numeric)",
+            "description": "View or report for orders, to keep track of total amounts",
+            "name": "OrderReport"
+        },
+        {
+            "classname": "ClassReport",
+            "code": "class ClassReport(Base):\n    \"\"\"description: View or report for classes, summarizing events and participation\"\"\"\n    __tablename__ = 'class_report'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    class_id = Column(Integer, ForeignKey('class.id'), nullable=False)\n    total_students = Column(Integer)\n    service_activity_count = Column(Integer)",
+            "description": "View or report for classes, summarizing events and participation",
+            "name": "ClassReport"
+        }
+    ],
+    "rules": [
+        {
+            "name": "Customer Balance Constraint",
+            "description": "Ensure that customer balance does not exceed their credit limit.",
+            "use_case": "When customer makes a purchase, their balance should not exceed their credit limit.",
+            "code": "Rule.constraint(validate=Customer,\n                as_condition=lambda row: row.balance <= row.credit_limit,\n                error_msg=\"Customer balance ({row.balance}) exceeds credit limit ({row.credit_limit})\")"
+        },
+        {
+            "name": "Order Amount Calculation",
+            "description": "Calculate the total amount of an order based on order details.",
+            "use_case": "Upon creating or updating order details, recalculate the total amount for the order.",
+            "code": "Rule.sum(derive=Order.amount_total, as_sum_of=OrderDetail.amount)"
+        },
+        {
+            "name": "Order Detail Amount Calculation",
+            "description": "Calculate the amount for each order detail line item.",
+            "use_case": "For each order detail item, compute the line amount based on quantity and price.",
+            "code": "Rule.formula(derive=OrderDetail.amount, as_expression=lambda row: row.quantity * row.item.price)"
+        },
+        {
+            "name": "Student Activity Count",
+            "description": "Count the number of service activities a student is involved in.",
+            "use_case": "Determine if a student qualifies as an honor student based on activities count.",
+            "code": "Rule.count(derive=Student.service_activity_count, as_count_of=StudentActivity, where=lambda row: row.activity.is_service_activity)"
+        }
+    ],
+    "test_data": "# Test data for Artist\nartist1 = Artist(name='Alice Pot', bio='An acclaimed potter from the coastal town.', birth_date=date(1980, 5, 21))\nartist2 = Artist(name='Clay Master', bio='Known for his modern art incorporating clay.', birth_date=date(1975, 8, 15))\nartist3 = Artist(name='Pottery Pro', bio='Specializes in pottery classes for beginners.', birth_date=date(1985, 3, 10))\nartist4 = Artist(name='Ceramic Sage', bio='A ceramic arts teacher with international exhibitions.', birth_date=date(1970, 9, 12))\n\n# Test data for Item\nitem1 = Item(name='Vase', description='A beautifully crafted vase.', price=25.00, artist_id=1)\nitem2 = Item(name='Bowl', description='A simple yet elegant bowl.', price=15.00, artist_id=2)\nitem3 = Item(name='Cup', description='A ceramic cup with an artistic flair.', price=10.00, artist_id=3)\nitem4 = Item(name='Plate', description='A decorative plate for display.', price=20.00, artist_id=4)\n\n# Test data for Class\nclass1 = Class(name='Beginners Pottery', description='A class for beginners to learn pottery basics.', price=50.00, date=date(2023, 11, 1), artist_id=3)\nclass2 = Class(name='Advanced Techniques', description='Masterclass on advanced pottery techniques.', price=100.00, date=date(2023, 11, 5), artist_id=1)\nclass3 = Class(name='Creative Sculpting', description='Explore your creative side in pottery.', price=80.00, date=date(2023, 11, 15), artist_id=2)\nclass4 = Class(name='Traditional Methods', description='Learn traditional pottery methods.', price=60.00, date=date(2023, 11, 20), artist_id=4)\n\n# Test data for Customer\ncustomer1 = Customer(name='John Doe', email='john@example.com', balance=0, credit_limit=1000)\ncustomer2 = Customer(name='Jane Smith', email='jane@example.com', balance=0, credit_limit=1500)\ncustomer3 = Customer(name='Alan Brown', email='alan@example.com', balance=0, credit_limit=500)\ncustomer4 = Customer(name='Diana Green', email='diana@example.com', balance=0, credit_limit=800)\n\n# Test data for Order\norder1 = Order(customer_id=1, date=date(2023, 10, 1), amount_total=55)\norder2 = Order(customer_id=1, date=date(2023, 10, 3), amount_total=20)\norder3 = Order(customer_id=2, date=date(2023, 10, 13), amount_total=100)\norder4 = Order(customer_id=3, date=date(2023, 10, 20), amount_total=30)\n\n# Test data for OrderDetail\norder_detail1 = OrderDetail(order_id=1, item_id=1, quantity=2, amount=50)\norder_detail2 = OrderDetail(order_id=2, item_id=3, quantity=2, amount=10)\norder_detail3 = OrderDetail(order_id=3, item_id=2, quantity=5, amount=75)\norder_detail4 = OrderDetail(order_id=4, item_id=4, quantity=1, amount=20)\n\n# Test data for Student\nstudent1 = Student(name=\"Emma White\", email=\"emma@example.com\", is_honor_student=False)\nstudent2 = Student(name=\"Lucas Blue\", email=\"lucas@example.com\", is_honor_student=False)\nstudent3 = Student(name=\"Olivia Red\", email=\"olivia@example.com\", is_honor_student=False)\nstudent4 = Student(name=\"Mason Black\", email=\"mason@example.com\", is_honor_student=False)\n\n# Test data for Enrollment\nenrollment1 = Enrollment(class_id=1, student_id=1, enrolment_date=date(2023, 9, 21))\nenrollment2 = Enrollment(class_id=2, student_id=2, enrolment_date=date(2023, 9, 25))\nenrollment3 = Enrollment(class_id=3, student_id=3, enrolment_date=date(2023, 9, 29))\nenrollment4 = Enrollment(class_id=4, student_id=4, enrolment_date=date(2023, 9, 30))\n\n# Test data for Activity\nactivity1 = Activity(name='Community Service', description='Helping the community through pottery.', is_service_activity=True)\nactivity2 = Activity(name='Exhibitions', description='Participate in national exhibitions.', is_service_activity=False)\nactivity3 = Activity(name='Workshops', description='Conduct workshops for pottery skills.', is_service_activity=False)\nactivity4 = Activity(name='Environmental Awareness', description='Pottery projects focused on environmental themes.', is_service_activity=True)\n\n# Test data for StudentActivity\nstudent_activity1 = StudentActivity(student_id=1, activity_id=1, participation_date=date(2023, 10, 1))\nstudent_activity2 = StudentActivity(student_id=2, activity_id=1, participation_date=date(2023, 10, 5))\nstudent_activity3 = StudentActivity(student_id=3, activity_id=2, participation_date=date(2023, 10, 9))\nstudent_activity4 = StudentActivity(student_id=4, activity_id=3, participation_date=date(2023, 10, 12))",
+    "name": "PotteryStore"
+}

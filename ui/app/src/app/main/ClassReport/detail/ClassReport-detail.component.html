@@ -1,0 +1,30 @@
+<div class="container">
+<o-form-container breadcrumb="yes" breadcrumb-label-columns="id" breadcrumb-separator=", " class="fill-form">
+      <o-form #form attr="ClassReport_form_edit" 
+        service="ClassReport" 
+        entity="ClassReport" 
+        fxLayout="column" 
+        show-header="yes" 
+        header-actions="R;I;U;D"
+        #oDetailForm keys="id" 
+        keys-sql-types="INTEGER" 
+        show-header-navigation="yes"
+        (onDataLoaded)="onDataLoaded($event)">
+
+  <o-row attr="row1" layout-align="start stretch">
+    <div fxLayout="row wrap" fxLayoutAlign="start start" fxFlex fxLayoutGap="14px">
+      
+      <o-integer-input #id attr="id" label=" id*" type="integer" editable="no" required="no" ></o-integer-input>
+      
+      <o-integer-input #total_students attr="total_students" label="total_students" type="integer" editable="no" required="no" ></o-integer-input>
+      
+      <o-integer-input #service_activity_count attr="service_activity_count" label="service_activity_count" type="integer" editable="no" required="no" ></o-integer-input>
+      
+      <o-integer-input #class_id attr="class_id" label="class_id" type="integer" editable="no" required="yes" ></o-integer-input>
+      
+    </div>
+  </o-row>
+      
+    </o-form>
+  </o-form-container>
+</div>
